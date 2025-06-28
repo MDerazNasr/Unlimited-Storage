@@ -1,0 +1,23 @@
+name: Auto Commit
+
+on:
+  push:
+    branches:
+      - main  # or 'master', or your target branch
+
+jobs:
+  auto-commit:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Make changes
+        run: |
+          echo "Updated at $(date)" >> update-log.txt
+
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: auto-update update-log.txt"
